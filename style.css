@@ -1,74 +1,167 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background: #000;
-    color: #fff;
+    box-sizing: border-box;
 }
 
-#app {
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: #000;
+    align-items: flex-start; /* Align items from the top */
+    min-height: 100vh;
+    padding: 20px;
 }
 
-h1 {
-    color: #ff0000;
+.container {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    text-align: center;
+    color: #333;
 }
 
 .logo {
+    display: block;
+    margin: 0 auto 20px;
     width: 100px;
 }
 
+/* Login Page */
+#login-page {
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
 input {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ff0000;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background: #222;
-    color: #fff;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 button {
-    padding: 10px;
-    background: #ff0000;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
-    color: #fff;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #cc0000;
+    background-color: #0056b3;
 }
 
-#login-page, #admin-dashboard, #employee-dashboard {
+#login-error {
+    color: red;
     text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-.hidden {
-    display: none;
+/* Contact Section */
+.contact {
+    margin-top: 50px; 
+    /* Add some space between login and contact */
+    margin-left: 80px;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#error-message {
-    color: #ff0000;
+.contact h2 {
+    color: #007bff;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 15px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.contact-details p {
+    margin: 10px 0;
+    font-size: 16px;
 }
 
-li {
-    background: #222;
-    margin: 5px;
-    padding: 10px;
+.contact-details strong {
+    color: #333;
+}
+
+iframe {
+    margin-top: 20px;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-section {
-    margin: 20px 0;
+/* Admin and Employee Dashboards */
+.dashboard {
+    display: none;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.dashboard h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.dashboard .section {
+    margin-top: 20px;
+}
+
+.dashboard button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5f57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard button:hover {
+    background-color: #e8453c;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container, .dashboard {
+        width: 100%;
+        padding: 15px;
+        box-shadow: none;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }
