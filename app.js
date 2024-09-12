@@ -1,81 +1,142 @@
-// Initialize users and tasks if not already in localStorage
-if (!localStorage.getItem('users')) {
-  const users = [
-    { username: "admin", password: "admin123", role: "admin" },
-    { username: "employee", password: "employee123", role: "employee" }
-  ];
-  localStorage.setItem('users', JSON.stringify(users));
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const loginPage = document.getElementById('login-page');
+    const adminDashboard = document.getElementById('admin-dashboard');
+    const employeeDashboard = document.getElementById('employee-dashboard');
+    const errorMessage = document.getElementById('error-message');
+    const taskList = document.getElementById('task-list');
+    const employeeTaskList = document.getElementById('employee-task-list');
+    const userList = document.getElementById('user-list');
+    const employeeDetails = document.getElementById('employee-details');
 
-if (!localStorage.getItem('tasks')) {
-  const tasks = [
-    { task: "Review the financial report", assignedTo: "admin" },
-    { task: "Prepare meeting agenda", assignedTo: "employee" }
-  ];
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+    const localStorage = window.localStorage;
 
-// Event listener for login
-document.getElementById("login-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  const users = JSON.parse(localStorage.getItem('users')); // Fetch users from localStorage
-  
-  const user = users.find(user => user.username === username && user.password === password);
-  
-  if (user) {
-    if (user.role === "admin") {
-      showPage("admin-dashboard");
-      displayTasks("admin");
-    } else {
-      showPage("employee-dashboard");
-      displayTasks("employee");
+    // Check if the user is logged in
+    function checkLogin() {
+        const user = localStorage.getItem('user');
+        if (user) {
+            if (user === 'admin') {
+                loginPage.classList.add('hidden');
+                adminDashboard.classList.remove('hidden');
+                loadTasks();
+                loadUsers();
+            } else {
+                loginPage.classList.add('hidden');
+                employeeDashboard.classList.remove('hidden');
+                loadEmployeeTasks();
+                loadEmployeeDetails();
+            }
+        }
     }
-  } else {
-    document.getElementById("error-msg").textContent = "Invalid credentials!";
-  }
-});
 
-// Show page by id
-function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
-  document.getElementById(pageId).style.display = 'block';
-}
+    // Handle login
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-// Display tasks based on role
-function displayTasks(role) {
-  const tasks = JSON.parse(localStorage.getItem('tasks')); // Fetch tasks from localStorage
-  const taskList = role === "admin" ? document.getElementById("task-list") : document.getElementById("employee-task-list");
-  taskList.innerHTML = '';
-  
-  tasks
-    .filter(task => task.assignedTo === role)
-    .forEach(task => {
-      const li = document.createElement('li');
-      li.textContent = task.task;
-      taskList.appendChild(li);
+        // Simple authentication logic
+        if (username === 'admin' && password === 'admin') {
+            localStorage.setItem('user', 'admin');
+            loginPage.classList.add('hidden');
+            adminDashboard.classList.remove('hidden');
+            loadTasks();
+            loadUsers();
+        } else if (username === 'employee' && password === 'employee') {
+            localStorage.setItem('user', 'employee');
+            loginPage.classList.add('hidden');
+            employeeDashboard.classList.remove('hidden');
+            loadEmployeeTasks();
+            loadEmployeeDetails();
+        } else {
+            errorMessage.textContent = 'Invalid credentials';
+        }
     });
-}
 
-// Add task for Admin
-document.getElementById("add-task-btn").addEventListener("click", function () {
-  const newTask = document.getElementById("new-task").value;
-  if (newTask) {
-    let tasks = JSON.parse(localStorage.getItem('tasks')); // Fetch tasks from localStorage
-    tasks.push({ task: newTask, assignedTo: "admin" });
-    localStorage.setItem('tasks', JSON.stringify(tasks));  // Save updated tasks to localStorage
-    displayTasks("admin");
-    document.getElementById("new-task").value = "";
-  }
-});
+    // Handle logout
+    function logout() {
+        localStorage.removeItem('user');
+        loginPage.classList.remove('hidden');
+        adminDashboard.classList.add('hidden');
+        employeeDashboard.classList.add('hidden');
+    }
 
-// Logout functionality
-document.getElementById("logout-btn").addEventListener("click", function () {
-  showPage("login-page");
-});
+    document.getElementById('logout').addEventListener('click', logout);
+    document.getElementById('logout-employee').addEventListener('click', logout);
 
-document.getElementById("logout-btn-employee").addEventListener("click", function () {
-  showPage("login-page");
+    // Add task
+    document.getElementById('add-task').addEventListener('click', () => {
+        const taskInput = document.getElementById('task-input');
+        const task = taskInput.value;
+        if (task) {
+            const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            taskInput.value = '';
+            loadTasks();
+        }
+    });
+
+    // Load tasks
+    function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+        taskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task;
+            taskList.appendChild(li);
+        });
+    }
+
+    // Add user
+    document.getElementById('add-user').addEventListener('click', () => {
+        const userInput = document.getElementById('user-input');
+        const user = userInput.value;
+        if (user) {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            userInput.value = '';
+            loadUsers();
+        }
+    });
+
+    // Load users
+    function loadUsers() {
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        userList.innerHTML = '';
+        users.forEach((user, index) => {
+            const li = document.createElement('li');
+            li.textContent = user;
+            userList.appendChild(li);
+        });
+    }
+
+    // Load employee tasks
+    function loadEmployeeTasks() {
+        const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+        employeeTaskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task;
+            employeeTaskList.appendChild(li);
+        });
+    }
+
+    // Load employee details
+    function loadEmployeeDetails() {
+        const details = localStorage.getItem('employeeDetails') || 'No details available.';
+        employeeDetails.textContent = details;
+    }
+
+    // Update employee details
+    document.getElementById('update-details').addEventListener('click', () => {
+        const newDetails = prompt('Enter new details:');
+        if (newDetails) {
+            localStorage.setItem('employeeDetails', newDetails);
+            loadEmployeeDetails();
+        }
+    });
+
+    // Initial check
+    checkLogin();
 });
