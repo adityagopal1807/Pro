@@ -8,8 +8,8 @@
 </head>
 <body>
     <!-- Login Page -->
-    <div id="login-page" class="container">
-        <img src="logo.png" alt="TechSolve Logo" class="logo">
+    <div id="login-page">
+        <img src="https://i.ibb.co/Pxn0J2t/Task-Logo-fullcol.png" alt="TechSolve Logo" class="logo">
         <h1>TechSolve - Task Management</h1>
         <form id="login-form">
             <input type="text" id="username" placeholder="Username" required>
@@ -28,23 +28,18 @@
             <form id="add-employee-form">
                 <input type="text" id="employee-name" placeholder="Employee Name" required>
                 <input type="text" id="employee-task" placeholder="Task" required>
-                <button type="submit">Add Task</button>
+                <button type="submit">Add Employee</button>
             </form>
             <ul id="employee-list"></ul>
         </div>
-        <div class="section">
-            <button id="contact-btn">Contact Details</button>
-        </div>
+        <button id="contact-btn">Contact Details</button>
     </div>
 
     <!-- Employee Dashboard -->
     <div id="employee-dashboard" class="dashboard">
         <h2>Welcome, <span id="employee-name-display"></span></h2>
+        <ul id="employee-task-list"></ul>
         <button id="logout-employee">Logout</button>
-        <div class="section">
-            <h3>Your Tasks</h3>
-            <ul id="employee-task-list"></ul>
-        </div>
     </div>
 
     <!-- Contact Section -->
