@@ -138,6 +138,26 @@ iframe {
     background-color: #cc0000;
 }
 
+/* Task Cards */
+.task-card {
+    background: #333;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.task-card.completed {
+    background: #444;
+    text-decoration: line-through;
+}
+
+.task-card button {
+    background: #ff4444;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .container, .dashboard, .contact {
