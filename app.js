@@ -3,6 +3,8 @@ let users = [
     { username: 'employee1', password: 'employee123', role: 'employee' }
 ];
 
+let tasks = []; // Store tasks for employees
+
 // Elements
 const loginPage = document.getElementById('login-page');
 const adminDashboard = document.getElementById('admin-dashboard');
@@ -11,15 +13,61 @@ const loginForm = document.getElementById('login-form');
 const loginError = document.getElementById('login-error');
 const employeeList = document.getElementById('employee-list');
 const employeeTaskList = document.getElementById('employee-task-list');
+const contactSection = document.getElementById('contact-section');
+const contactBtn = document.getElementById('contact-btn');
+const contactBackBtn = document.getElementById('contact-back-btn');
+const addEmployeeForm = document.getElementById('add-employee-form');
+const employeeNameInput = document.getElementById('employee-name');
+const employeeTaskInput = document.getElementById('employee-task');
+const logoutBtn = document.getElementById('logout');
+const logoutEmployeeBtn = document.getElementById('logout-employee');
 
-// Function to switch dashboards based on role
+// Event Listeners
+loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    login(username, password);
+});
+
+addEmployeeForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const taskName = employeeTaskInput.value;
+    if (taskName) {
+        addTaskToEmployee(employeeNameInput.value, taskName);
+        employeeNameInput.value = '';
+        employeeTaskInput.value = '';
+    }
+});
+
+contactBtn.addEventListener('click', function() {
+    adminDashboard.style.display = 'none';
+    contactSection.style.display = 'block';
+});
+
+contactBackBtn.addEventListener('click', function() {
+    contactSection.style.display = 'none';
+    adminDashboard.style.display = 'block';
+});
+
+logoutBtn.addEventListener('click', function() {
+    adminDashboard.style.display = 'none';
+    loginPage.style.display = 'block';
+});
+
+logoutEmployeeBtn.addEventListener('click', function() {
+    employeeDashboard.style.display = 'none';
+    loginPage.style.display = 'block';
+});
+
+// Function to handle login
 function login(username, password) {
     const user = users.find(u => u.username === username && u.password === password);
     if (user) {
         if (user.role === 'admin') {
             showAdminDashboard();
         } else {
-            showEmployeeDashboard(user.username);
+            showEmployeeDashboard(username);
         }
     } else {
         loginError.textContent = 'Invalid login credentials';
@@ -30,6 +78,8 @@ function login(username, password) {
 function showAdminDashboard() {
     loginPage.style.display = 'none';
     adminDashboard.style.display = 'block';
+    contactSection.style.display = 'none';
+    employeeDashboard.style.display = 'none';
     updateEmployeeList();
 }
 
@@ -37,4 +87,57 @@ function showAdminDashboard() {
 function showEmployeeDashboard(username) {
     loginPage.style.display = 'none';
     employeeDashboard.style.display = 'block';
-    document.getElementBy
+    adminDashboard.style.display = 'none';
+    contactSection.style.display = 'none';
+    document.getElementById('employee-name-display').textContent = username;
+    updateEmployeeTaskList(username);
+}
+
+// Update the list of employees and tasks
+function updateEmployeeList() {
+    employeeList.innerHTML = '';
+    tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.className = 'task-card';
+        li.innerHTML = `
+            <p><strong>${task.employee}</strong>: ${task.task}</p>
+            <button onclick="deleteTask('${task.id}')">Delete</button>
+        `;
+        employeeList.appendChild(li);
+    });
+}
+
+// Add a task to the employee's task list
+function addTaskToEmployee(employee, taskName) {
+    const taskId = new Date().getTime(); // Simple unique ID
+    tasks.push({ id: taskId, employee, task: taskName });
+    updateEmployeeList();
+}
+
+// Update employee's task list
+function updateEmployeeTaskList(username) {
+    employeeTaskList.innerHTML = '';
+    tasks.filter(task => task.employee === username).forEach(task => {
+        const li = document.createElement('li');
+        li.className = 'task-card';
+        li.innerHTML = `
+            <p>${task.task}</p>
+            <button onclick="markTaskCompleted('${task.id}')">Mark as Completed</button>
+        `;
+        employeeTaskList.appendChild(li);
+    });
+}
+
+// Mark task as completed
+function markTaskCompleted(taskId) {
+    tasks = tasks.map(task =>
+        task.id === taskId ? { ...task, completed: true } : task
+    );
+    updateEmployeeTaskList(document.getElementById('employee-name-display').textContent);
+}
+
+// Delete a task
+function deleteTask(taskId) {
+    tasks = tasks.filter(task => task.id !== taskId);
+    updateEmployeeList();
+}
