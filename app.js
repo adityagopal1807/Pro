@@ -33,8 +33,10 @@ loginForm.addEventListener('submit', function(event) {
 addEmployeeForm.addEventListener('submit', function(event) {
     event.preventDefault();
     const taskName = employeeTaskInput.value;
-    if (taskName) {
-        addTaskToEmployee(employeeNameInput.value, taskName);
+    const employeeName = employeeNameInput.value;
+
+    if (taskName && employeeName) {
+        addTaskToEmployee(employeeName, taskName);
         employeeNameInput.value = '';
         employeeTaskInput.value = '';
     }
@@ -93,7 +95,7 @@ function showEmployeeDashboard(username) {
     updateEmployeeTaskList(username);
 }
 
-// Update the list of employees and tasks
+// Update the list of employees and tasks for Admin
 function updateEmployeeList() {
     employeeList.innerHTML = '';
     tasks.forEach(task => {
@@ -114,7 +116,7 @@ function addTaskToEmployee(employee, taskName) {
     updateEmployeeList();
 }
 
-// Update employee's task list
+// Update employee's task list for the logged-in employee
 function updateEmployeeTaskList(username) {
     employeeTaskList.innerHTML = '';
     tasks.filter(task => task.employee === username).forEach(task => {
@@ -122,18 +124,9 @@ function updateEmployeeTaskList(username) {
         li.className = 'task-card';
         li.innerHTML = `
             <p>${task.task}</p>
-            <button onclick="markTaskCompleted('${task.id}')">Mark as Completed</button>
         `;
         employeeTaskList.appendChild(li);
     });
-}
-
-// Mark task as completed
-function markTaskCompleted(taskId) {
-    tasks = tasks.map(task =>
-        task.id === taskId ? { ...task, completed: true } : task
-    );
-    updateEmployeeTaskList(document.getElementById('employee-name-display').textContent);
 }
 
 // Delete a task
