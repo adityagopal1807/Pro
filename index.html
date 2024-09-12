@@ -3,56 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitZone</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TechSolve - Task Management</title>
+    <link rel="stylesheet" href="startup.css">
 </head>
 <body>
-    <div id="app">
-        <!-- Login Page -->
-        <div id="login-page">
-            <h1>FitZone</h1>
-            <img src="https://i.ibb.co/P61MKq4/FITZONE-logo.png" alt="FitZone Logo" class="logo">
-            <form id="login-form">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-                <p id="error-message"></p>
+    <!-- Login Page -->
+    <div id="login-page">
+        <img src="_Blue & Black Simple Company Logo.png" alt="TechSolve Logo" class="logo">
+        <h1>TechSolve - Task Management</h1>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="login-error"></p>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="dashboard">
+        <h2>Welcome Admin</h2>
+        <button id="logout">Logout</button>
+        <div class="section">
+            <h3>Manage Employees</h3>
+            <form id="add-employee-form">
+                <input type="text" id="employee-name" placeholder="Employee Name" required>
+                <input type="text" id="employee-task" placeholder="Task" required>
+                <button type="submit">Add Employee</button>
             </form>
-        </div>
-
-        <!-- Admin Dashboard -->
-        <div id="admin-dashboard" class="hidden">
-            <h1>Admin Dashboard</h1>
-            <button id="logout">Logout</button>
-            <div class="dashboard-section">
-                <h2>Manage Tasks</h2>
-                <input type="text" id="task-input" placeholder="New Task">
-                <button id="add-task">Add Task</button>
-                <ul id="task-list"></ul>
-            </div>
-            <div class="dashboard-section">
-                <h2>User Management</h2>
-                <input type="text" id="user-input" placeholder="New User">
-                <button id="add-user">Add User</button>
-                <ul id="user-list"></ul>
-            </div>
-        </div>
-
-        <!-- Employee Dashboard -->
-        <div id="employee-dashboard" class="hidden">
-            <h1>Employee Dashboard</h1>
-            <button id="logout-employee">Logout</button>
-            <div class="dashboard-section">
-                <h2>Your Tasks</h2>
-                <ul id="employee-task-list"></ul>
-            </div>
-            <div class="dashboard-section">
-                <h2>Personal Details</h2>
-                <p id="employee-details"></p>
-                <button id="update-details">Update Details</button>
-            </div>
+            <ul id="employee-list"></ul>
         </div>
     </div>
+
+    <!-- Admin Dashboard -->
+<div id="admin-dashboard" class="dashboard">
+    <h2>Welcome Admin</h2>
+    <button id="logout">Logout</button>
+    
+    <div class="section">
+        <h3>Manage Employees</h3>
+        <form id="add-employee-form">
+            <input type="text" id="employee-name" placeholder="Employee Name" required>
+            <input type="text" id="employee-task" placeholder="Task" required>
+            <button type="submit">Add Employee</button>
+        </form>
+        <ul id="employee-list"></ul>
+    </div>
+    
+    <!-- Button to open Contact Details -->
+    <div class="section">
+        <button id="contact-btn">Contact Details</button>
+    </div>
+</div>
+
+<
+
+    <!-- Contact Section -->
+    <div id="contact-section" class="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-details">
+            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+            <p><strong>Email:</strong> support@techsolve.com</p>
+            <p><strong>Address:</strong> 123 TechSolve Blvd, Suite 100, TechCity, TX 12345</p>
+        </div>
+
+        <!-- Embedded Map (Google Maps or other service) -->
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093887!2d144.95373631531574!3d-37.81720997975179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43fdf84c8f%3A0x5045675218ce6e0!2s123+TechSolve+Blvd%2C+Suite+100%2C+TechCity%2C+TX+12345!5e0!3m2!1sen!2sus!4v1639518743654!5m2!1sen!2sus"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+   
+
+
     <script src="app.js"></script>
 </body>
 </html>
