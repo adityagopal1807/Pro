@@ -6,40 +6,34 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: #333;
+    color: #f0f0f0;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items from the top */
+    align-items: flex-start;
     min-height: 100vh;
     padding: 20px;
 }
 
-.container {
-    max-width: 400px;
+.container, .dashboard, .contact {
+    max-width: 600px;
     width: 100%;
-    margin: 0 auto;
     padding: 20px;
-    background: white;
+    background: #222;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 h1, h2, h3 {
     font-weight: 600;
     text-align: center;
-    color: #333;
+    color: #fff;
 }
 
 .logo {
     display: block;
     margin: 0 auto 20px;
-    width: 100px;
-}
-
-/* Login Page */
-#login-page {
-    display: block;
+    width: 120px;
 }
 
 form {
@@ -51,21 +45,22 @@ form {
 input {
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
     border-radius: 5px;
     font-size: 16px;
-    background-color: #f9f9f9;
+    background-color: #444;
+    color: #f0f0f0;
     transition: border 0.3s ease;
 }
 
 input:focus {
-    border-color: #007bff;
+    border-color: #ff4444;
     outline: none;
 }
 
 button {
     padding: 12px;
-    background-color: #007bff;
+    background-color: #ff4444;
     color: white;
     border: none;
     border-radius: 5px;
@@ -76,11 +71,11 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #cc0000;
 }
 
 #login-error {
-    color: red;
+    color: #ff4444;
     text-align: center;
     margin-top: 10px;
     font-size: 14px;
@@ -88,19 +83,11 @@ button:hover {
 
 /* Contact Section */
 .contact {
-    margin-top: 50px; 
-    /* Add some space between login and contact */
-    margin-left: 80px;
-    max-width: 500px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
 }
 
 .contact h2 {
-    color: #007bff;
-    text-align: center;
+    color: #ff4444;
     font-size: 28px;
     margin-bottom: 15px;
 }
@@ -111,24 +98,22 @@ button:hover {
 }
 
 .contact-details strong {
-    color: #333;
+    color: #fff;
 }
 
 iframe {
     margin-top: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Admin and Employee Dashboards */
 .dashboard {
     display: none;
-    max-width: 500px;
-    padding: 20px;
 }
 
 .dashboard h2 {
-    color: #007bff;
+    color: #ff4444;
     margin-bottom: 10px;
     font-size: 28px;
 }
@@ -140,7 +125,7 @@ iframe {
 .dashboard button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ff5f57;
+    background-color: #ff4444;
     color: white;
     border: none;
     border-radius: 5px;
@@ -150,12 +135,12 @@ iframe {
 }
 
 .dashboard button:hover {
-    background-color: #e8453c;
+    background-color: #cc0000;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .container, .dashboard {
+    .container, .dashboard, .contact {
         width: 100%;
         padding: 15px;
         box-shadow: none;
