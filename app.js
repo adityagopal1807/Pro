@@ -9,6 +9,8 @@ const adminDashboard = document.getElementById('admin-dashboard');
 const employeeDashboard = document.getElementById('employee-dashboard');
 const loginForm = document.getElementById('login-form');
 const loginError = document.getElementById('login-error');
+const employeeList = document.getElementById('employee-list');
+const employeeTaskList = document.getElementById('employee-task-list');
 
 // Function to switch dashboards based on role
 function login(username, password) {
@@ -35,10 +37,4 @@ function showAdminDashboard() {
 function showEmployeeDashboard(username) {
     loginPage.style.display = 'none';
     employeeDashboard.style.display = 'block';
-    document.getElementById('employee-name-display').textContent = username;
-    updateEmployeeTaskList(username);
-}
-
-// Event listeners for login
-loginForm.addEventListener('submit', function(e) {
-    e.prevent
+    document.getElementBy
