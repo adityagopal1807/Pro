@@ -81,7 +81,6 @@ button:hover {
     font-size: 14px;
 }
 
-/* Contact Section */
 .contact {
     margin-top: 50px;
 }
@@ -97,17 +96,12 @@ button:hover {
     font-size: 16px;
 }
 
-.contact-details strong {
-    color: #fff;
-}
-
 iframe {
     margin-top: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Admin and Employee Dashboards */
 .dashboard {
     display: none;
 }
@@ -122,51 +116,10 @@ iframe {
     margin-top: 20px;
 }
 
-.dashboard button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.dashboard button:hover {
-    background-color: #cc0000;
-}
-
-/* Task Cards */
 .task-card {
     background: #333;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.task-card.completed {
-    background: #444;
-    text-decoration: line-through;
-}
-
-.task-card button {
-    background: #ff4444;
-    margin-top: 10px;
-    border-radius: 3px;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .container, .dashboard, .contact {
-        width: 100%;
-        padding: 15px;
-        box-shadow: none;
-    }
-
-    button {
-        font-size: 14px;
-    }
 }
