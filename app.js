@@ -3,7 +3,7 @@ let users = [
     { username: 'employee1', password: 'employee123', role: 'employee' }
 ];
 
-let tasks = []; // Store tasks for employees
+let tasks = [];
 
 // Elements
 const loginPage = document.getElementById('login-page');
@@ -21,6 +21,19 @@ const employeeNameInput = document.getElementById('employee-name');
 const employeeTaskInput = document.getElementById('employee-task');
 const logoutBtn = document.getElementById('logout');
 const logoutEmployeeBtn = document.getElementById('logout-employee');
+
+// Load tasks from LocalStorage
+function loadTasksFromLocalStorage() {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+        tasks = JSON.parse(storedTasks);
+    }
+}
+
+// Save tasks to LocalStorage
+function saveTasksToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 // Event Listeners
 loginForm.addEventListener('submit', function(event) {
@@ -52,85 +65,4 @@ contactBackBtn.addEventListener('click', function() {
     adminDashboard.style.display = 'block';
 });
 
-logoutBtn.addEventListener('click', function() {
-    adminDashboard.style.display = 'none';
-    loginPage.style.display = 'block';
-});
-
-logoutEmployeeBtn.addEventListener('click', function() {
-    employeeDashboard.style.display = 'none';
-    loginPage.style.display = 'block';
-});
-
-// Function to handle login
-function login(username, password) {
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        if (user.role === 'admin') {
-            showAdminDashboard();
-        } else {
-            showEmployeeDashboard(username);
-        }
-    } else {
-        loginError.textContent = 'Invalid login credentials';
-    }
-}
-
-// Show Admin Dashboard
-function showAdminDashboard() {
-    loginPage.style.display = 'none';
-    adminDashboard.style.display = 'block';
-    contactSection.style.display = 'none';
-    employeeDashboard.style.display = 'none';
-    updateEmployeeList();
-}
-
-// Show Employee Dashboard
-function showEmployeeDashboard(username) {
-    loginPage.style.display = 'none';
-    employeeDashboard.style.display = 'block';
-    adminDashboard.style.display = 'none';
-    contactSection.style.display = 'none';
-    document.getElementById('employee-name-display').textContent = username;
-    updateEmployeeTaskList(username);
-}
-
-// Update the list of employees and tasks for Admin
-function updateEmployeeList() {
-    employeeList.innerHTML = '';
-    tasks.forEach(task => {
-        const li = document.createElement('li');
-        li.className = 'task-card';
-        li.innerHTML = `
-            <p><strong>${task.employee}</strong>: ${task.task}</p>
-            <button onclick="deleteTask('${task.id}')">Delete</button>
-        `;
-        employeeList.appendChild(li);
-    });
-}
-
-// Add a task to the employee's task list
-function addTaskToEmployee(employee, taskName) {
-    const taskId = new Date().getTime(); // Simple unique ID
-    tasks.push({ id: taskId, employee, task: taskName });
-    updateEmployeeList();
-}
-
-// Update employee's task list for the logged-in employee
-function updateEmployeeTaskList(username) {
-    employeeTaskList.innerHTML = '';
-    tasks.filter(task => task.employee === username).forEach(task => {
-        const li = document.createElement('li');
-        li.className = 'task-card';
-        li.innerHTML = `
-            <p>${task.task}</p>
-        `;
-        employeeTaskList.appendChild(li);
-    });
-}
-
-// Delete a task
-function deleteTask(taskId) {
-    tasks = tasks.filter(task => task.id !== taskId);
-    updateEmployeeList();
-}
+logoutBtn.add
